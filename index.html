@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickleball for a Purpose | A Fill a Heart 4 Kids Fundraiser</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    <style>
+        /* CSS Reset and Root Variables */
+        :root {
+            --primary-dark-blue: #1A3A5A;
+            --primary-accent: #FFC107;
+            --primary-accent-dark: #e6af06;
+            --secondary-bg: #F8F9FA;
+            --text-dark: #212529;
+            --text-light: #F8F9FA;
+            --border-color: #dee2e6;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* General Styles */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            color: var(--primary-dark-blue);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); text-align: center; }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: 1rem;
+            max-width: 65ch;
+        }
+        
+        a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            padding: clamp(4rem, 10vh, 8rem) 0;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title p {
+            text-align: center;
+            color: #6c757d;
+            max-width: 60ch;
+            margin: 1rem auto 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: var(--primary-dark-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-accent-dark);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .nav {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav__logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark-blue);
+        }
+        
+        .nav__menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav__list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav__link {
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav__link:hover::after {
+            width: 100%;
+        }
+        
+        .nav__toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            color: var(--primary-dark-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 80px; /* Offset for fixed header */
+            background: linear-gradient(rgba(26, 58, 90, 0.85), rgba(26, 58, 90, 0.85)), url('banner.jpg') no-repeat center center/cover;
+            color: var(--white);
+        }
+        
+        .hero__container {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .hero h1 {
+            color: var(--white);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .hero__subtitle {
+            font-size: 1.25rem;
+            max-width: 60ch;
+            margin: 1.5rem 0 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Countdown Timer */
+        #countdown {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            min-width: 90px;
+        }
+        
+        .countdown-item span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-accent);
+        }
+        
+        .countdown-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* About Section */
+        .about__container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 5rem;
+        }
+        
+        .about__content h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about__image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Details Section */
+        #details {
+            background-color: var(--secondary-bg);
+        }
+
+        .details__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .detail-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .detail-card__icon {
+            font-size: 3rem;
+            color: var(--primary-accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Sponsors Section */
+        .sponsors__container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+            flex-wrap: wrap;
+        }
+        
+        .sponsor-card {
+            text-align: center;
+        }
+        
+        .sponsor-card img {
+            height: 80px;
+            max-width: 220px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .sponsor-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: var(--primary-dark-blue);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            color: var(--white);
+        }
+        
+        .cta p {
+            margin: 1.5rem auto 2.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer__container {
+            border-bottom: 1px solid #495057;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer__links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .footer__link a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer__link a:hover {
+            color: var(--primary-accent);
+        }
+        
+        .footer__copy, .footer__credit {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .footer__credit a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 992px) {
+            .nav__menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                gap: 3rem;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav__menu.show-menu {
+                right: 0;
+            }
+            
+            .nav__list {
+                flex-direction: column;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .nav__link {
+                font-size: 1.25rem;
+            }
+            
+            .nav__toggle {
+                display: block;
+            }
+
+            .about__container {
+                grid-template-columns: 1fr;
+            }
+            .about__image {
+                grid-row: 1; /* Move image to top on mobile */
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            #countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .countdown-item {
+                flex-basis: calc(50% - 0.5rem);
+                padding: 0.8rem;
+            }
+            .countdown-item span {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">Fill a Heart 4 Kids Pickleball Tournament</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#details" class="nav__link">Details</a></li>
+                    <li class="nav__item"><a href="#sponsors" class="nav__link">Sponsors</a></li>
+                </ul>
+                <a href="https://docs.google.com/forms/d/1OB6x0o3dcXI0t7EbszynxgtBVQE3DqwpktN7LeScRxk/edit?ts=67ccebc6" class="btn btn-primary nav__btn" target="_blank">Register Now</a>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero__container container">
+                <h1>Serve, Rally, & Support</h1>
+                <p class="hero__subtitle">Join us for a day of fun, community, and friendly competition to make a difference in the lives of local children. All for a great cause.</p>
+                <div id="countdown"></div>
+                <a href="https://docs.google.com/forms/d/1OB6x0o3dcXI0t7EbszynxgtBVQE3DqwpktN7LeScRxk/edit?ts=67ccebc6" class="btn btn-primary" target="_blank">Register to Play!</a>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+            <div class="about__container container reveal">
+                <div class="about__content">
+                    <h2>More Than a Game.<br>A Chance to Give Back.</h2>
+                    <p>Welcome to a tournament where community spirit and fun are the real winners. This doubles-only pickleball event is open to all skill levels, with proceeds benefiting Fill a Heart 4 Kids.</p>
+                    <p>Your participation helps provide food, educational supplies, and critical care to underprivileged and at-risk children across the greater Chicago area. Let's make a lasting impact, one game at a time.</p>
+                    <p>Learn more about their mission at <a href="https://www.fillaheart4kids.org" target="_blank">fillaheart4kids.org</a>.</p>
+                </div>
+                <div class="about__image-wrapper">
+                    <img src="f4k.png" alt="Fill a Heart 4 Kids" class="about__image">
+                </div>
+            </div>
+        </section>
+
+        <!-- DETAILS -->
+        <section class="section" id="details">
+            <div class="container reveal">
+                <div class="section-title">
+                    <h2>Event Details</h2>
+                    <p>Everything you need to know to join in on the fun and make a difference.</p>
+                </div>
+                <div class="details__grid">
+                    <div class="detail-card">
+                        <i class="ri-calendar-event-line detail-card__icon"></i>
+                        <h3>Date & Time</h3>
+                        <p>Sunday, June 29, 2025<br>Starts at 8:30 AM</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="ri-map-pin-line detail-card__icon"></i>
+                        <h3>Location</h3>
+                        <p><a href="https://thepicklr.com/location/mundelein/" target="_blank">The Picklr – Mundelein, IL</a><br>(Located Near LA Fitness)</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="ri-team-line detail-card__icon"></i>
+                        <h3>Format & Entry</h3>
+                        <p>Open Doubles Tournament<br><strong>$10 Fee Per Person</strong><br><small>50/50 split between prize pool and charity.</small></p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="ri-trophy-line detail-card__icon"></i>
+                        <h3>Grand Prize</h3>
+                        <p>The winning team takes home<br><strong>50% of the prize pool!</strong><br><small>More players = a bigger prize!</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPONSORS -->
+        <section class="section" id="sponsors">
+            <div class="container reveal">
+                <div class="section-title">
+                    <h2>Our Generous Partners</h2>
+                    <p>This community event is made possible by the incredible support of our sponsors. Please support the businesses that support our community.</p>
+                </div>
+                <div class="sponsors__container">
+                    <div class="sponsor-card">
+                        <a href="https://thefitinstitutechicago.com/" target="_blank">
+                            <img src="tfi.png" alt="TFI Physical Therapy & Sports Performance Logo">
+                        </a>
+                        <p><strong>TFI Physical Therapy</strong><br>Co-Sponsor & On-site Player Support</p>
+                    </div>
+                    <div class="sponsor-card">
+                        <a href="https://thepicklr.com/location/mundelein/" target="_blank">
+                            <img src="pick.png" alt="The Picklr Mundelein Logo">
+                        </a>
+                        <p><strong>The Picklr - Mundelein</strong><br>Proposed Host Venue</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION -->
+        <section class="section cta" id="register">
+            <div class="container reveal">
+                <h2>Ready to Play?</h2>
+                <p>Spots are limited. Register today to secure your place in the tournament and help support a child in need!</p>
+                <a href="https://docs.google.com/forms/d/1OB6x0o3dcXI0t7EbszynxgtBVQE3DqwpktN7LeScRxk/edit?ts=67ccebc6" class="btn btn-primary" target="_blank">Secure Your Spot Now</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__container">
+                <ul class="footer__links">
+                    <li class="footer__link"><a href="#about">About</a></li>
+                    <li class="footer__link"><a href="#details">Details</a></li>
+                    <li class="footer__link"><a href="#sponsors">Sponsors</a></li>
+                </ul>
+                <p>For questions, please contact <a href="mailto:info@fillaheart4kids.org">info@fillaheart4kids.org</a></p>
+            </div>
+            <p class="footer__copy">&copy; 2025 Fill a Heart 4 Kids. All Rights Reserved.</p>
+            <p class="footer__credit">Banner photo by <a href="https://unsplash.com/@brendansapp" target="_blank">Brendan Sapp</a> on Unsplash. Website by Gemini.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            /* Mobile Nav Toggle */
+            const navMenu = document.getElementById('nav-menu');
+            const navToggle = document.getElementById('nav-toggle');
+            const navClose = document.querySelectorAll('.nav__link');
+
+            if (navToggle) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('show-menu');
+                });
+            }
+
+            const closeMenu = () => navMenu.classList.remove('show-menu');
+            navClose.forEach(n => n.addEventListener('click', closeMenu));
+            
+            /* Countdown Timer */
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                const eventDate = new Date('June 29, 2025 08:30:00').getTime();
+
+                const updateCountdown = () => {
+                    const now = new Date().getTime();
+                    const distance = eventDate - now;
+
+                    if (distance < 0) {
+                        countdownElement.innerHTML = "<h3>The event has started!</h3>";
+                        clearInterval(countdownInterval);
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    countdownElement.innerHTML = `
+                        <div class="countdown-item"><span>${days}</span><p>Days</p></div>
+                        <div class="countdown-item"><span>${hours}</span><p>Hours</p></div>
+                        <div class="countdown-item"><span>${minutes}</span><p>Minutes</p></div>
+                        <div class="countdown-item"><span>${seconds}</span><p>Seconds</p></div>
+                    `;
+                };
+
+                const countdownInterval = setInterval(updateCountdown, 1000);
+                updateCountdown();
+            }
+
+            /* Reveal on Scroll */
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+
+</body>
+</html>
